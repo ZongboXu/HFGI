@@ -1,2 +1,2 @@
 # HFGI
-Modelling high frequency guided infrasound
+Modelling high-frequency (>0.5 Hz) guided infrasound in the atmosphere
