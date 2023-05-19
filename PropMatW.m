@@ -12,6 +12,9 @@ function w0 = PropMatW(alpha,w,rho,thickness,omega,c)
 %% Output
 % w0:    the vertical particle velocity on the ground surface. 
 % If w0 = 0, a root is found for the frequency
+%% 2023/04 
+% fixing a typo about tm, where omega should be omega * w*k, found by Wanbo 
+% This typo leads to about a 5% difference of 1/omega, which does not generate obvious differences in the group velocity values
 altitude   = sum(thickness);
 k = omega/c;
 nlay = length(alpha)-1;
@@ -27,7 +30,7 @@ for ilay = nlay:-1:1
     P = zeros(2,2);
     dz = -thickness(ilay);
     v  = sqrt( (1-w(ilay)^2/alpha(ilay)^2)*k^2-omega^2/alpha(ilay)^2+2*w(ilay)*k*omega/alpha(ilay)^2 );
-    tm = 1i*v/omega/rho(ilay);
+    tm = 1i*v/(omega - w(ilay)*k)/rho(ilay);
     P(1,1) = cosh(v*dz);
     P(1,2) = sinh(v*dz)/tm;
     P(2,1) = sinh(v*dz)*tm;
